@@ -10,9 +10,15 @@ local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
-require("tima.daisy");
-require("tima.butterfly");
+require("tima.im");
 local drop      = require("scratchdrop")
+
+awful.util.spawn_with_shell("setxkbmap -option grp:switch,grp:alt_shift_toggle us,ru")
+awful.util.spawn_with_shell("run_once start-pulseaudio-x11")
+awful.util.spawn_with_shell("run_once parcellite -d")
+awful.util.spawn_with_shell("run_once dropbox start")
+awful.util.spawn_with_shell("xset s off")
+awful.util.spawn_with_shell("wicd-gtk")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -59,12 +65,9 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
     awful.layout.suit.tile,
-    tima.daisy,
-    tima.butterfly,
-    awful.layout.suit.fair,
-    awful.layout.suit.floating,
     awful.layout.suit.max,
-    awful.layout.suit.max.fullscreen,
+    awful.layout.suit.fair,
+    tima.im,
 }
 -- }}}
 
@@ -77,13 +80,21 @@ end
 -- }}}
 
 -- {{{ Tags
--- Define a tag table which hold all screen tags.
-tags = {}
+local layouts = awful.layout.layouts
+tags = {
+    settings = {{
+        names  = { 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+        layout = {
+            layouts[1], layouts[2], layouts[4], layouts[1],
+            layouts[1], layouts[1], layouts[1], layouts[1], layouts[1]
+        }
+    }
+}}
+
 for s = 1, screen.count() do
-    -- Each screen has its own tag table.
-    tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, awful.layout.layouts[1])
+    tags[s] = awful.tag(tags.settings[s].names, s, tags.settings[s].layout)
 end
--- }}}
+ -- }}}
 
 -- {{{ Menu
 -- Create a laucher widget and a main menu
