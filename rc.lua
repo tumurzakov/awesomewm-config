@@ -119,8 +119,8 @@ function run(command)
 end
 
 mytimer = timer({ timeout = 1 })
-mytimer:connect_signal("timeout", 
-    function() 
+mytimer:connect_signal("timeout",
+    function()
         get_health()
     end)
 mytimer:start()
