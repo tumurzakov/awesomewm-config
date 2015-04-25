@@ -10,9 +10,9 @@ local beautiful = require("beautiful")
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
-require("tima.daisy");
-require("tima.butterfly");
-require("tima.im");
+require("tima.daisy")
+require("tima.butterfly")
+require("tima.im")
 local drop      = require("scratchdrop")
 
 -- {{{ Error handling
@@ -278,7 +278,6 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "g", function () awful.util.spawn("xsecurelock auth_pam_x11 saver_blank") end),
     awful.key({ modkey,           }, "e", function () awful.util.spawn("nautilus --no-desktop") end),
     awful.key({ modkey,           }, "`", function () drop("terminator --profile=POP", "left", "top", 0.6, 0.6) end),
-    awful.key({ modkey,           }, "o", function () drop("google-chrome --new-window https://kanban-chi.appspot.com/dashboard/6629473768177664", "left", "top", 1, 1) end),
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
@@ -471,3 +470,5 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+
+require("local")
