@@ -1,0 +1,3 @@
+[submodule "attachdrop"]
+	path = attachdrop
+	url = https://github.com/tumurzakov/attachdrop.git

@@ -13,7 +13,7 @@ local menubar = require("menubar")
 require("tima.daisy")
 require("tima.butterfly")
 require("tima.im")
-local drop = require("drop")
+local drop = require("attachdrop")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -275,13 +275,6 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
-    awful.key({ modkey,           }, "g", function () awful.util.spawn("xsecurelock auth_pam_x11 saver_blank") end),
-    awful.key({ modkey,           }, "e", function () awful.util.spawn("nautilus --no-desktop") end),
-    awful.key({ modkey,           }, "`", function () drop.toggle("terminator --profile=POP", "left", "top", 0.6, 0.6) end),
-    awful.key({ modkey, "Control" }, "`", function () drop.attach("terminator --profile=POP") end),
-    awful.key({ modkey,           }, "q", function () drop.toggle("emacs", "left", "top", 0.9, 0.9) end),
-    awful.key({ modkey, "Control" }, "q", function () drop.attach("emacs") end),
-
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
     awful.key({ modkey, "Shift"   }, "h",     function () awful.tag.incnmaster( 1)      end),
@@ -296,7 +289,7 @@ globalkeys = awful.util.table.join(
     -- Prompt
     awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
 
-    awful.key({ modkey }, "x",
+    awful.key({ modkey },            "x",
               function ()
                   awful.prompt.run({ prompt = "Run Lua code: " },
                   mypromptbox[mouse.screen].widget,
@@ -305,6 +298,23 @@ globalkeys = awful.util.table.join(
               end),
     -- Menubar
     awful.key({ modkey }, "p", function() menubar.show() end)
+)
+
+globalkeys = awful.util.table.join(
+    awful.key({ modkey,           }, "g", function () awful.util.spawn("xsecurelock auth_pam_x11 saver_blank") end),
+    awful.key({ modkey,           }, "e", function () awful.util.spawn("nautilus --no-desktop") end),
+
+    awful.key({ modkey,           }, "`", function () drop.toggle("terminator --profile=POP", "left", "top", 0.8, 0.8) end),
+    awful.key({ modkey, "Control" }, "`", function () drop.attach("terminator --profile=POP") end),
+    awful.key({ modkey,           }, "q", function () drop.toggle("emacs", "left", "top", 0.95, 0.95) end),
+    awful.key({ modkey, "Control" }, "q", function () drop.attach("emacs") end),
+
+    awful.key({ modkey,           }, "a", function () drop.toggle("custom1", "left", "top", 0.95, 0.95) end),
+    awful.key({ modkey, "Control" }, "a", function () drop.attach("custom1") end),
+    awful.key({ modkey,           }, "s", function () drop.toggle("custom2", "left", "top", 0.95, 0.95) end),
+    awful.key({ modkey, "Control" }, "s", function () drop.attach("custom2") end),
+    awful.key({ modkey,           }, "d", function () drop.toggle("custom3", "left", "top", 0.95, 0.95) end),
+    awful.key({ modkey, "Control" }, "d", function () drop.attach("custom3") end)
 )
 
 clientkeys = awful.util.table.join(
