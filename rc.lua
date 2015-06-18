@@ -13,7 +13,7 @@ local menubar = require("menubar")
 require("tima.daisy")
 require("tima.butterfly")
 require("tima.im")
-local drop      = require("scratchdrop")
+local drop = require("drop")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -277,8 +277,10 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),
     awful.key({ modkey,           }, "g", function () awful.util.spawn("xsecurelock auth_pam_x11 saver_blank") end),
     awful.key({ modkey,           }, "e", function () awful.util.spawn("nautilus --no-desktop") end),
-    awful.key({ modkey,           }, "`", function () drop("terminator --profile=POP", "left", "top", 0.6, 0.6) end),
-    awful.key({ modkey,           }, "q", function () drop("emacs", "left", "top", 0.9, 0.9) end),
+    awful.key({ modkey,           }, "`", function () drop.toggle("terminator --profile=POP", "left", "top", 0.6, 0.6) end),
+    awful.key({ modkey, "Control" }, "`", function () drop.attach("terminator --profile=POP") end),
+    awful.key({ modkey,           }, "q", function () drop.toggle("emacs", "left", "top", 0.9, 0.9) end),
+    awful.key({ modkey, "Control" }, "q", function () drop.attach("emacs") end),
 
     awful.key({ modkey,           }, "l",     function () awful.tag.incmwfact( 0.05)    end),
     awful.key({ modkey,           }, "h",     function () awful.tag.incmwfact(-0.05)    end),
